@@ -6,9 +6,9 @@ import dust from 'dustjs-helpers'
 import pg from 'pg'
 
 const config = {
-  user: 'Leeboy', //env var: PGUSER
+  user: 'PGUSER', //env var: PGUSER
   database: 'recipebookdb', //env var: PGDATABASE
-  password: 'postgresql', //env var: PGPASSWORD
+  password: 'PGPASSWORD', //env var: PGPASSWORD
   host: 'localhost', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
