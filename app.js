@@ -6,9 +6,9 @@ import dust from 'dustjs-helpers'
 import pg from 'pg'
 
 const config = {
-  user: 'PGUSER', //env var: PGUSER
+  user: 'Leeboy', //env var: PGUSER
   database: 'recipebookdb', //env var: PGDATABASE
-  password: 'PGPASSWORD', //env var: PGPASSWORD
+  password: 'postgresql', //env var: PGPASSWORD
   host: 'localhost', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
@@ -45,13 +45,25 @@ app.get('/', (req, res) => {
         return console.error('error running query.', err)
       }
       done(err)
-      console.log(result.rows)
+      // console.log(result.rows)
       res.render('layout', {recipies: result.rows})
     })
   })
 
   pool.on('error', function (err, client) {
     console.error('idle client error', err.message, err.stack)
+  })
+})
+
+app.post('/add', (req, res) => {
+  pool.connect((err, client, done) => {
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('INSERT INTO recipes(name, ingredients, directions) VALUES($1, $2, $3)',
+    [req.body.name, req.body.ingredients, req.body.directions])
+    done()
+    res.redirect('/')
   })
 })
 
