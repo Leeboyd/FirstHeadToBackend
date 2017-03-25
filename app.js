@@ -6,7 +6,7 @@ import dust from 'dustjs-helpers'
 import pg from 'pg'
 
 const config = {
-  user: 'Leeboy', //env var: PGUSER
+  user: 'PGUSER', //env var: 'Leeboy'
   database: 'PGDATABASE', //env var: 'recipebookdb'
   password: 'PGPASSWORD', //env var: 'postgresql'
   host: 'localhost', // Server hosting the postgres database
@@ -77,6 +77,20 @@ app.delete('/delete/:id', (req, res) => {
     done()
     res.sendStatus(200)
   }) 
+})
+
+app.post('/edit', (req, res) => {
+  console.log([req.body.name, req.body.ingredients, req.body.directions, req.body.id])
+  pool.connect((err, client, done) => {
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('UPDATE recipes SET name=$1, ingredients=$2, directions=$3 WHERE id = $4',
+    [req.body.name, req.body.ingredients, req.body.directions, req.body.id])
+    done()
+    // res.sendStatus(200)
+    res.redirect('/')
+  })
 })
 
 // Server
