@@ -7,8 +7,8 @@ import pg from 'pg'
 
 const config = {
   user: 'Leeboy', //env var: PGUSER
-  database: 'recipebookdb', //env var: PGDATABASE
-  password: 'postgresql', //env var: PGPASSWORD
+  database: 'PGDATABASE', //env var: 'recipebookdb'
+  password: 'PGPASSWORD', //env var: 'postgresql'
   host: 'localhost', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
@@ -65,6 +65,18 @@ app.post('/add', (req, res) => {
     done()
     res.redirect('/')
   })
+})
+
+app.delete('/delete/:id', (req, res) => {
+  pool.connect((err, client, done) => {
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('DELETE FROM recipes WHERE id = $1',
+    [req.params.id])
+    done()
+    res.sendStatus(200)
+  }) 
 })
 
 // Server
