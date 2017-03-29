@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch public/js --watch app.js --watch bin/ --exec babel-node bin/www.js"
+    "test": "NODE_ENV=test nodemon --watch public/js --watch app.js --watch bin/ --exec babel-node bin/www.js",
+    "dev": "NODE_ENV=development nodemon --watch public/js --watch app.js --watch bin/ --exec babel-node bin/www.js",
+    "knex": "babel-node node_modules/.bin/knex"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,14 @@
     "babel-preset-stage-3": "^6.22.0",
     "babel-register": "^6.23.0",
     "body-parser": "^1.17.1",
+    "bookshelf": "^0.10.3",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "express": "^4.15.2",
-    "morgan": "^1.8.1"
+    "knex": "^0.12.9",
+    "mocha": "^3.2.0",
+    "morgan": "^1.8.1",
+    "pg": "^6.1.5",
+    "pg-hstore": "^2.3.2"
   }
 }
