@@ -104,4 +104,31 @@ describe('API Routes', () => {
       })
     })
   })
+
+  describe('PUT /api/v1/show/:id', () => {
+    it('should update a show', (done) => {
+      chai.request(server)
+      .put('/api/v1/shows/2')
+      .send({
+        rating: 2,
+        genre: 'Adventure'
+      })
+      .end(function (err, res) {
+        res.should.have.status(200)
+        res.should.be.a('object')
+        res.body.should.have.property('name')
+        res.body.name.should.equal('Game of Thrones')
+        res.body.should.have.property('channel')
+        res.body.channel.should.equal('HBO')
+        res.body.should.include.keys('genre')
+        res.body.genre.should.equal('Adventure')
+        res.body.should.have.property('rating')
+        res.body.rating.should.be.below(5)
+        res.body.rating.should.equal(2)
+        res.body.should.include.keys('explicit')
+        res.body.explicit.should.be.true 
+        done()       
+      })
+    })
+  })
 })

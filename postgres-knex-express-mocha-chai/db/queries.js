@@ -10,5 +10,8 @@ export default {
   },
   addSingle (show) {
     return this.Shows().insert(show, 'id')
+  },
+  editSingle (showID, updates) {
+    return this.Shows().where('id', showID * 1).update(updates)
   }
 }

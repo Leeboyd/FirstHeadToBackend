@@ -33,4 +33,14 @@ router.post('/shows', (req, res, next) => {
   .catch(error => next(error))
 })
 
+// --------------------------------
+// PUT a show
+// --------------------------------
+router.put('/shows/:id', (req, res, next) => {
+  queries.editSingle(req.params.id, req.body)
+  .then((show) => queries.getSingle(req.params.id))
+  .then((show) => res.status(200).json(show))
+  .catch(error => next(error))
+})
+
 export default router
