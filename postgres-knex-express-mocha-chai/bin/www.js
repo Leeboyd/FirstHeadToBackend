@@ -8,4 +8,6 @@ app.set('port', port)
 
 const server = http.createServer(app)
 
-server.listen(port)
+server.listen(port, () => {
+  console.log(`Server Start On port 3012, running at ${process.env.NODE_ENV}`)
+})

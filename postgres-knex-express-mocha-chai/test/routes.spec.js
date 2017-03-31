@@ -103,6 +103,27 @@ describe('API Routes', () => {
         done()
       })
     })
+    it('self assign ID should be a Number', (done) => {
+      chai.request(server)
+      .post('/api/v1/shows')
+      .send({
+        id: 'string',
+        name: 'Family Guy2',
+        channel: 'Foxy',
+        genre: 'Comedy',
+        rating: 3,
+        explicit: true
+      })
+      .end(function (err, res) {
+        // err.should.be.null
+        res.should.have.status(422)
+        res.should.be.a.json
+        res.body.should.be.a('object')
+        res.body.should.have.property('message')
+        res.body.message.should.equal('id 必須為 number')
+        done()
+      })
+    })  
   })
 
   describe('PUT /api/v1/show/:id', () => {
@@ -128,6 +149,23 @@ describe('API Routes', () => {
         res.body.should.include.keys('explicit')
         res.body.explicit.should.be.true 
         done()       
+      })
+    })
+    it('should NOT update a show if the id field is part of the requests', (done) => {
+      chai.request(server)
+      .put('/api/v1/shows/2')
+      .send({
+        id: 200,
+        rating: 1,
+        genre: 'Adventure'
+      })
+      .end(function(err, res) {
+        res.should.have.status(422)
+        res.should.be.a.json
+        res.body.should.be.a('object')
+        res.body.should.have.property('error')
+        res.body.error.should.equal('You shall not update the id field')
+        done()
       })
     })
   })

@@ -27,6 +27,13 @@ router.get('/shows/:id', (req, res, next) => {
 // POST a show
 // --------------------------------
 router.post('/shows', (req, res, next) => {
+  if (req.body.hasOwnProperty('id') && !Number.isInteger(req.body.id)) {
+    const err = {
+      status: 422,
+      message: 'id 必須為 number'
+    }
+    return next(err)
+  }
   queries.addSingle(req.body)
   .then((showID) => queries.getSingle(showID))
   .then((show) => res.status(200).json(show))
@@ -37,8 +44,13 @@ router.post('/shows', (req, res, next) => {
 // PUT a show
 // --------------------------------
 router.put('/shows/:id', (req, res, next) => {
+  if (req.body.hasOwnProperty('id')) {
+    return res.status(422).json({
+      error: 'You shall not update the id field'
+    })
+  }
   queries.editSingle(req.params.id, req.body)
-  .then((show) => queries.getSingle(req.params.id))
+  .then(() => queries.getSingle(req.params.id))
   .then((show) => res.status(200).json(show))
   .catch(error => next(error))
 })

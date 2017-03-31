@@ -8,7 +8,6 @@ const app = express()
 
 // Log requests to the console.
 if (process.env.NODE_ENV !== 'test') {
-  console.log(app.get('env'))
   app.use(logger('dev'))
 }
 

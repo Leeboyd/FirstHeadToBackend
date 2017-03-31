@@ -6,6 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test node_modules/.bin/mocha --compilers js:babel-core/register",
     "dev": "NODE_ENV=development nodemon --watch db/ --watch routes/ --watch app.js --watch bin/ --exec babel-node bin/www.js",
+    "testdev": "NODE_ENV=test nodemon --watch db/ --watch routes/ --watch app.js --watch bin/ --exec babel-node bin/www.js",
     "knex": "babel-node node_modules/.bin/knex",
     "testknex": "NODE_ENV=test babel-node node_modules/.bin/knex"
   },
