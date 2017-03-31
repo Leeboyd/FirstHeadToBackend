@@ -26,10 +26,10 @@ npm run-script mon
 Navigate to http://localhost:3012/, and you should see **recipebook** on the main page.
 
 # API
-**/** `GET`
+- **/** `GET`
 List all recipes
 
-**/add** `POST`
+- **/add** `POST`
 add a recipe.
 
 | attribute | type | description
@@ -38,10 +38,10 @@ add a recipe.
 | `ingredients` | String | 材料
 | `directions` | String | 料理方式
 
-**/delete/:id** `DEL`
+- **/delete/:id** `DEL`
 del a recipe.
 
-**/edit** `PUT`
+- **/edit** `PUT`
 edit a recipe.
 
 | attribute | type | description
