@@ -1,7 +1,7 @@
 
 # Recipebook
 
-> Build A recipebook App Started with Node, Express and Postgres Using Sequelize 
+> Build A recipebook App Started with Node, Express and Postgres 
 
 # Requirement
 
@@ -23,6 +23,7 @@ Using `nodemon` to watch any change of js file in public/js
 ```shell
 npm run-script mon
 ```
+Navigate to http://localhost:3012/, and you should see **recipebook** on the main page.
 
 # API
 **/** `GET`
