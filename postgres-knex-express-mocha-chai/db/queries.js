@@ -13,5 +13,8 @@ export default {
   },
   editSingle (showID, updates) {
     return this.Shows().where('id', showID * 1).update(updates)
+  },
+  deleteSingle(showID) {
+    return this.Shows().where('id', showID * 1).del()
   }
 }

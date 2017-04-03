@@ -55,4 +55,17 @@ router.put('/shows/:id', (req, res, next) => {
   .catch(error => next(error))
 })
 
+// --------------------------------
+// DEL a show
+// --------------------------------
+router.delete('/shows/:id', (req, res, next) => {
+  queries.getSingle(req.params.id)
+  .then((show) => {
+    queries.deleteSingle(req.params.id)
+    .then(() => res.status(200).json(show))
+    .catch(error => next(error))
+  })
+  .catch(error => next(error))
+})
+
 export default router
